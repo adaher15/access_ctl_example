@@ -1,20 +1,10 @@
 const AccessControl = require("accesscontrol");
-const ac = new AccessControl();
- 
+const fs = require('fs');
+let rawdata = fs.readFileSync('server/roles_profile.json');
+let _roles = JSON.parse(rawdata);
+const ac = new AccessControl(_roles);
+
 exports.roles = (function() {
-ac.grant("basic")
- .readOwn("profile")
- .updateOwn("profile")
- 
-ac.grant("supervisor")
- .extend("basic")
- .readAny("profile")
- 
-ac.grant("admin")
- .extend("basic")
- .extend("supervisor")
- .updateAny("profile")
- .deleteAny("profile")
- 
+ console.log('\n_______\n', JSON.stringify(ac.getGrants()));
 return ac;
 })();

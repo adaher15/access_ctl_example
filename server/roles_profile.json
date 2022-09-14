@@ -1,0 +1,21 @@
+{
+    "basic": {
+        "profile": {
+            "read:own": ["*"],
+            "update:own": ["*"]
+        }
+    },
+    "supervisor": {
+        "$extend": ["basic"],
+        "profile": {
+            "read:any": ["*"]
+        }
+    },
+    "admin": {
+        "$extend": ["basic", "supervisor"],
+        "profile": {
+            "update:any": ["*"],
+            "delete:any": ["*"]
+        }
+    }
+}
